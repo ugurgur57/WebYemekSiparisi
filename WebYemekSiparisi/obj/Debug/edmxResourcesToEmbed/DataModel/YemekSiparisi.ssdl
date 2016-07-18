@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="yemeksiparisiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="altmenu">
+    <Key>
+      <PropertyRef Name="altmenuid" />
+    </Key>
+    <Property Name="altmenuid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="menuid" Type="int" Nullable="false" />
+    <Property Name="altmenuad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="aciklama" Type="varchar(max)" />
+    <Property Name="silindi" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="kullanici">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kullaniciad" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="sifre" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="admin" Type="bit" Nullable="false" />
+    <Property Name="ad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="soyad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="tcno" Type="varchar" MaxLength="11" />
+    <Property Name="telefon" Type="varchar" MaxLength="10" />
+    <Property Name="adres" Type="varchar(max)" />
+    <Property Name="ilce" Type="varchar" MaxLength="20" />
+    <Property Name="il" Type="varchar" MaxLength="20" />
+    <Property Name="silindi" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="menu">
+    <Key>
+      <PropertyRef Name="menuid" />
+    </Key>
+    <Property Name="menuid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="menuad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="aciklama" Type="varchar(max)" />
+    <Property Name="silindi" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="satisdetaylari">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="satisno" Type="int" Nullable="false" />
+    <Property Name="urunid" Type="int" Nullable="false" />
+    <Property Name="adet" Type="int" Nullable="false" />
+    <Property Name="birimfiyat" Type="money" Nullable="false" />
+    <Property Name="tutar" Type="money" StoreGeneratedPattern="Computed" />
+    <Property Name="silindi" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="satislar">
+    <Key>
+      <PropertyRef Name="satisno" />
+    </Key>
+    <Property Name="satisno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tarih" Type="datetime" Nullable="false" />
+    <Property Name="kullanicino" Type="int" Nullable="false" />
+    <Property Name="tutar" Type="money" Nullable="false" />
+    <Property Name="miktar" Type="int" Nullable="false" />
+    <Property Name="teslimtarihi" Type="datetime" Nullable="false" />
+    <Property Name="durumu" Type="tinyint" Nullable="false" />
+    <Property Name="silindi" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="urun">
+    <Key>
+      <PropertyRef Name="urunid" />
+    </Key>
+    <Property Name="urunid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="urunad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="menuid" Type="int" Nullable="false" />
+    <Property Name="altmenuid" Type="int" Nullable="false" />
+    <Property Name="urunfiyat" Type="money" Nullable="false" />
+    <Property Name="urunbilgisi" Type="varchar(max)" />
+    <Property Name="urunresimyolu1" Type="varchar(max)" />
+    <Property Name="urunresimyolu2" Type="varchar(max)" />
+    <Property Name="silindi" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_altmenu_menu">
+    <End Role="menu" Type="Self.menu" Multiplicity="1" />
+    <End Role="altmenu" Type="Self.altmenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="menu">
+        <PropertyRef Name="menuid" />
+      </Principal>
+      <Dependent Role="altmenu">
+        <PropertyRef Name="menuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_satisdetaylari_satislar">
+    <End Role="satislar" Type="Self.satislar" Multiplicity="1" />
+    <End Role="satisdetaylari" Type="Self.satisdetaylari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="satislar">
+        <PropertyRef Name="satisno" />
+      </Principal>
+      <Dependent Role="satisdetaylari">
+        <PropertyRef Name="satisno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_satisdetaylari_urun">
+    <End Role="urun" Type="Self.urun" Multiplicity="1" />
+    <End Role="satisdetaylari" Type="Self.satisdetaylari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="urun">
+        <PropertyRef Name="urunid" />
+      </Principal>
+      <Dependent Role="satisdetaylari">
+        <PropertyRef Name="urunid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_satislar_kullanici">
+    <End Role="kullanici" Type="Self.kullanici" Multiplicity="1" />
+    <End Role="satislar" Type="Self.satislar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kullanici">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="satislar">
+        <PropertyRef Name="kullanicino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_urun_menu">
+    <End Role="menu" Type="Self.menu" Multiplicity="1" />
+    <End Role="urun" Type="Self.urun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="menu">
+        <PropertyRef Name="menuid" />
+      </Principal>
+      <Dependent Role="urun">
+        <PropertyRef Name="menuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="yemeksiparisiModelStoreContainer">
+    <EntitySet Name="altmenu" EntityType="Self.altmenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="kullanici" EntityType="Self.kullanici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="menu" EntityType="Self.menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="satisdetaylari" EntityType="Self.satisdetaylari" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="satislar" EntityType="Self.satislar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="urun" EntityType="Self.urun" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_altmenu_menu" Association="Self.FK_altmenu_menu">
+      <End Role="menu" EntitySet="menu" />
+      <End Role="altmenu" EntitySet="altmenu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_satisdetaylari_satislar" Association="Self.FK_satisdetaylari_satislar">
+      <End Role="satislar" EntitySet="satislar" />
+      <End Role="satisdetaylari" EntitySet="satisdetaylari" />
+    </AssociationSet>
+    <AssociationSet Name="FK_satisdetaylari_urun" Association="Self.FK_satisdetaylari_urun">
+      <End Role="urun" EntitySet="urun" />
+      <End Role="satisdetaylari" EntitySet="satisdetaylari" />
+    </AssociationSet>
+    <AssociationSet Name="FK_satislar_kullanici" Association="Self.FK_satislar_kullanici">
+      <End Role="kullanici" EntitySet="kullanici" />
+      <End Role="satislar" EntitySet="satislar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_urun_menu" Association="Self.FK_urun_menu">
+      <End Role="menu" EntitySet="menu" />
+      <End Role="urun" EntitySet="urun" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

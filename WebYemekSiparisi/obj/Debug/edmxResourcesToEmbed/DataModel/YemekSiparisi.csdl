@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="yemeksiparisiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="altmenu">
+    <Key>
+      <PropertyRef Name="altmenuid" />
+    </Key>
+    <Property Name="altmenuid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="menuid" Type="Int32" Nullable="false" />
+    <Property Name="altmenuad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="silindi" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="menu" Relationship="Self.FK_altmenu_menu" FromRole="altmenu" ToRole="menu" />
+  </EntityType>
+  <EntityType Name="kullanici">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kullaniciad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sifre" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="admin" Type="Boolean" Nullable="false" />
+    <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tcno" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="telefon" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ilce" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="il" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="silindi" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="satislar" Relationship="Self.FK_satislar_kullanici" FromRole="kullanici" ToRole="satislar" />
+  </EntityType>
+  <EntityType Name="menu">
+    <Key>
+      <PropertyRef Name="menuid" />
+    </Key>
+    <Property Name="menuid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="menuad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="silindi" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="altmenu" Relationship="Self.FK_altmenu_menu" FromRole="menu" ToRole="altmenu" />
+    <NavigationProperty Name="urun" Relationship="Self.FK_urun_menu" FromRole="menu" ToRole="urun" />
+  </EntityType>
+  <EntityType Name="satisdetaylari">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="satisno" Type="Int32" Nullable="false" />
+    <Property Name="urunid" Type="Int32" Nullable="false" />
+    <Property Name="adet" Type="Int32" Nullable="false" />
+    <Property Name="birimfiyat" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="tutar" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="silindi" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="satislar" Relationship="Self.FK_satisdetaylari_satislar" FromRole="satisdetaylari" ToRole="satislar" />
+    <NavigationProperty Name="urun" Relationship="Self.FK_satisdetaylari_urun" FromRole="satisdetaylari" ToRole="urun" />
+  </EntityType>
+  <EntityType Name="satislar">
+    <Key>
+      <PropertyRef Name="satisno" />
+    </Key>
+    <Property Name="satisno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tarih" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="kullanicino" Type="Int32" Nullable="false" />
+    <Property Name="tutar" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="miktar" Type="Int32" Nullable="false" />
+    <Property Name="teslimtarihi" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="durumu" Type="Byte" Nullable="false" />
+    <Property Name="silindi" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="kullanici" Relationship="Self.FK_satislar_kullanici" FromRole="satislar" ToRole="kullanici" />
+    <NavigationProperty Name="satisdetaylari" Relationship="Self.FK_satisdetaylari_satislar" FromRole="satislar" ToRole="satisdetaylari" />
+  </EntityType>
+  <EntityType Name="urun">
+    <Key>
+      <PropertyRef Name="urunid" />
+    </Key>
+    <Property Name="urunid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="urunad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="menuid" Type="Int32" Nullable="false" />
+    <Property Name="altmenuid" Type="Int32" Nullable="false" />
+    <Property Name="urunfiyat" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="urunbilgisi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="urunresimyolu1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="urunresimyolu2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="silindi" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="menu" Relationship="Self.FK_urun_menu" FromRole="urun" ToRole="menu" />
+    <NavigationProperty Name="satisdetaylari" Relationship="Self.FK_satisdetaylari_urun" FromRole="urun" ToRole="satisdetaylari" />
+  </EntityType>
+  <Association Name="FK_altmenu_menu">
+    <End Role="menu" Type="Self.menu" Multiplicity="1" />
+    <End Role="altmenu" Type="Self.altmenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="menu">
+        <PropertyRef Name="menuid" />
+      </Principal>
+      <Dependent Role="altmenu">
+        <PropertyRef Name="menuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_satislar_kullanici">
+    <End Role="kullanici" Type="Self.kullanici" Multiplicity="1" />
+    <End Role="satislar" Type="Self.satislar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kullanici">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="satislar">
+        <PropertyRef Name="kullanicino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_urun_menu">
+    <End Role="menu" Type="Self.menu" Multiplicity="1" />
+    <End Role="urun" Type="Self.urun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="menu">
+        <PropertyRef Name="menuid" />
+      </Principal>
+      <Dependent Role="urun">
+        <PropertyRef Name="menuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_satisdetaylari_satislar">
+    <End Role="satislar" Type="Self.satislar" Multiplicity="1" />
+    <End Role="satisdetaylari" Type="Self.satisdetaylari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="satislar">
+        <PropertyRef Name="satisno" />
+      </Principal>
+      <Dependent Role="satisdetaylari">
+        <PropertyRef Name="satisno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_satisdetaylari_urun">
+    <End Role="urun" Type="Self.urun" Multiplicity="1" />
+    <End Role="satisdetaylari" Type="Self.satisdetaylari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="urun">
+        <PropertyRef Name="urunid" />
+      </Principal>
+      <Dependent Role="satisdetaylari">
+        <PropertyRef Name="urunid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="yemeksiparisiEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="altmenu" EntityType="Self.altmenu" />
+    <EntitySet Name="kullanici" EntityType="Self.kullanici" />
+    <EntitySet Name="menu" EntityType="Self.menu" />
+    <EntitySet Name="satisdetaylari" EntityType="Self.satisdetaylari" />
+    <EntitySet Name="satislar" EntityType="Self.satislar" />
+    <EntitySet Name="urun" EntityType="Self.urun" />
+    <AssociationSet Name="FK_altmenu_menu" Association="Self.FK_altmenu_menu">
+      <End Role="menu" EntitySet="menu" />
+      <End Role="altmenu" EntitySet="altmenu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_satislar_kullanici" Association="Self.FK_satislar_kullanici">
+      <End Role="kullanici" EntitySet="kullanici" />
+      <End Role="satislar" EntitySet="satislar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_urun_menu" Association="Self.FK_urun_menu">
+      <End Role="menu" EntitySet="menu" />
+      <End Role="urun" EntitySet="urun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_satisdetaylari_satislar" Association="Self.FK_satisdetaylari_satislar">
+      <End Role="satislar" EntitySet="satislar" />
+      <End Role="satisdetaylari" EntitySet="satisdetaylari" />
+    </AssociationSet>
+    <AssociationSet Name="FK_satisdetaylari_urun" Association="Self.FK_satisdetaylari_urun">
+      <End Role="urun" EntitySet="urun" />
+      <End Role="satisdetaylari" EntitySet="satisdetaylari" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

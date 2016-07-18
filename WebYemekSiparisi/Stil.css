@@ -1,0 +1,254 @@
+﻿body {
+    background-image: url('images/Master/arkaplan.jpg');
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    font-family: Verdana;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+    a:hover {
+        color: #555;
+    }
+
+#wrapper {
+    width: 960px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.banner {
+    width: 960px;
+    height: 205px;
+    background-color: white;
+}
+
+header {
+    margin-top: 20px;
+    width: 100%;
+    height: 45px;
+    background-color:gold;
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+}
+
+    header nav {
+        float: left;
+        width: 699px;
+        height: 45px;
+        border-right: 1px solid black;
+        line-height: 45px;
+    }
+
+        header nav ul {
+            list-style: none;
+        }
+
+            header nav ul li {
+                float: left;
+                margin-left: 18px;
+                font-weight: bold;
+            }
+
+                header nav ul li ul {
+                    display: none;
+                }
+
+                header nav ul li:hover ul {
+                    display: block;
+                }
+
+.acilir {
+    position: relative;
+}
+
+    .acilir ul {
+        position: absolute;
+        width: 200px;
+        height: auto;
+        background-color: gold;
+        left: 0px;
+    }
+
+        .acilir ul li {
+            font-size: small;
+            float: inherit;
+            /*margin: inherit;*/
+            border-bottom: 1px solid black;
+        }
+
+header .search {
+    float: left;
+    width: 260px;
+    height: 45px;
+}
+
+    header .search .txtArama {
+        float: left;
+        padding: 10px;
+        width: 180px;
+        height: 25px;
+        background-color: gold;
+        line-height: 25px;
+    }
+
+    header .search .btnArama {
+        float: left;
+        width: 59px;
+        height: 45px;
+        border-left: 1px solid black;
+    }
+
+.left {
+    float: left;
+    width: 285px;
+    margin-top: 45px;
+    height: auto;
+    background-color: gold;
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+
+}
+
+    .left .ust {
+        float: left;
+        width: 270px;
+        height: 44px;
+        padding-left: 15px;
+        line-height: 44px;
+        border-bottom: 1px solid black;
+        font-weight: bold;
+    }
+
+    .left .alt {
+        float: left;
+        width: 248px;
+        height: auto;
+        padding: 12.5px;
+        border-bottom: 1px solid black;
+    }
+
+    .left .btn {
+        width: 100px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: gold;
+        background-color: black;
+        float:unset;
+        margin-top: 10px;
+        margin-left:15px;
+        font-size: large;
+    }
+
+    .left .alt .text {
+        width: 243px;
+        height: 38px;
+        border: 1px solid black;
+        padding-left: 5px;
+    }
+
+    .left .alt .btn {
+        width: 100px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: gold;
+        background-color: black;
+        float: right;
+        margin-top: 10px;
+        font-size: large;
+    }
+
+    .left .alt .btnk {
+        width: 100px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: gold;
+        background-color: dimgray;
+        float: left;
+        margin-top: 10px;
+        font-size: large;
+    }
+
+    .left .alt .btn:hover {
+        background-color: dimgray;
+    }
+
+    .left .alt .btnk:hover {
+        background-color: black;
+    }
+
+    .left .sepetozeti .ust {
+        width: 270px;
+        height: auto;
+        font-weight: bold;
+        padding-left: 15px;
+    }
+
+.content {
+    float: right;
+    width: 625px;
+    height: auto;
+    margin-top: 45px;
+    background-color: gold;
+}
+
+footer {
+    float: left;
+    width: 960px;
+    height: 80px;
+    margin: 0 auto;
+    margin-top: 30px;
+    background-image: url('images/Master/footer.jpg');
+}
+
+.kayit {
+    margin: 45px;
+    float: left;
+}
+
+    .kayit .text {
+        border: 1px solid black;
+        padding-left: 5px;
+    }
+
+    .kayit .label {
+        width: 150px;
+        height: 25px;
+        padding-left: 5px;
+    }
+
+    .kayit .btn {
+        width: 100px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: gold;
+        background-color: black;
+        float: unset;
+        margin-top: 10px;
+        font-size: large;
+    }
+    .odeme .btn{
+        width: 150px;
+        height: 40px;
+        text-align: center;
+        color: gold;
+        background-color: black;
+        float:unset;
+        margin-top: 10px;
+        margin-left:15px;
+        font-size: medium;
+    }
+    
